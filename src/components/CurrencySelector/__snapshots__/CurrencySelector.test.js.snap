@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencySelector should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Container "
+  >
+    <label
+      class="Label"
+    >
+      :
+    </label>
+    <div
+      class="InputContainer"
+    >
+      <div
+        class="SelectedCurrencyContainer"
+      >
+        <div
+          class="CurrencyIcon "
+        />
+        <div
+          class="CurrencyName"
+        />
+      </div>
+      <span
+        class="DropdownArrow"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,52 @@
+@import '../../variables';
+
+.Container {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+    sans-serif;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 564px;
+  padding: 40px 52px;
+  border-radius: 1px;
+  background-color: $c-white;
+  box-shadow: 0 0 15px 0 $c-bluish-shadow;
+
+  @media (max-width: $b-small) {
+    width: 100%;
+    padding: 20px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.CurrencySelectorsContainer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 30px;
+
+  > div {
+    width: 42%;
+  }
+}
+
+.InitialAmountInputContainer {
+  margin-bottom: 72px;
+}
+
+.AmountInputsContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+
+  @media (max-width: $b-small) {
+    margin-bottom: 16px;
+  }
+
+  > div {
+    width: 42%;
+  }
+}

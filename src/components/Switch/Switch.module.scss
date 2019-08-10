@@ -1,0 +1,17 @@
+@import '../../variables';
+
+.Button {
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  background-color: $c-white;
+}
+
+.Icon {
+  display: inline-block;
+  width: 25px;
+  height: 22px;
+  background-image: url('./icon-switch.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
