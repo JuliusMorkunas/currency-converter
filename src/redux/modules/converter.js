@@ -1,4 +1,4 @@
-import { limitDecimals } from '../../utils/helpers';
+import { formatToCurrency } from '../../utils/helpers';
 import { getCurrencyFromTo, setCurrencyFromTo } from '../../utils/localStorage';
 import { getExchangeRate } from '../../utils/api';
 
@@ -106,10 +106,10 @@ const recalculateAfterRateUpdate = async (dispatch, getState) => {
     converter: { amountFrom = 0 },
   } = getState();
   const rate = await getRate()(dispatch, getState);
-  const nextAmountTo = limitDecimals(rate ? amountFrom * rate : 0);
+  const nextAmountTo = formatToCurrency(rate ? amountFrom * rate : 0);
   onChangeAmountTo(nextAmountTo)(dispatch);
   if (!rate) {
-    const nextAmountFrom = limitDecimals(0);
+    const nextAmountFrom = formatToCurrency(0);
     onChangeAmountFrom(nextAmountFrom)(dispatch);
   }
 };
@@ -124,7 +124,7 @@ export const initialize = () => (dispatch, getState) => {
   }
   dispatch({
     type: CHANGE_AMOUNT_TO,
-    payload: limitDecimals(amountFrom * rate),
+    payload: formatToCurrency(amountFrom * rate),
   });
   dispatch({
     type: INITIALIZE,
@@ -195,7 +195,7 @@ export const getRate = () => async (dispatch, getState) => {
     type: GET_RATE,
   });
   const {
-    converter: { amountFrom, currencyFrom, currencyTo },
+    converter: { currencyFrom, currencyTo },
   } = getState();
   if (!currencyFrom || !currencyTo) {
     dispatch({
@@ -207,7 +207,7 @@ export const getRate = () => async (dispatch, getState) => {
     const response = await getExchangeRate({
       from: currencyFrom.toUpperCase(),
       to: currencyTo.toUpperCase(),
-      amount: amountFrom,
+      amount: 100, // Using relatively big hardcoded value to prevent AMOUNT_TOO_LOW API error
     });
     if (response.rate) {
       dispatch({

@@ -20,7 +20,7 @@ import AmountInput from '../../components/AmountInput';
 import Disclaimer from '../../components/Disclaimer';
 import ExchangeRate from '../../components/ExchangeRate';
 import Button from '../../components/Button';
-import { limitDecimals } from '../../utils/helpers';
+import { formatToCurrency } from '../../utils/helpers';
 
 const LABELS = {
   from: 'From',
@@ -51,13 +51,14 @@ export function App({
   selectCurrencyTo,
   getRate,
 }) {
+  // TODO: Might want to use exact calculations from API instead of doing math on the client side based on fetched rate
   const [debouncedOnChangeAmountFrom] = useDebouncedCallback(async value => {
     const rate = await getRate();
-    onChangeAmountTo(limitDecimals(rate ? value * rate : 0));
+    onChangeAmountTo(formatToCurrency(rate ? value * rate : 0));
   }, INPUT_DEBOUNCE_MS);
   const [debouncedOnChangeAmountTo] = useDebouncedCallback(async value => {
     const rate = await getRate();
-    onChangeAmountFrom(limitDecimals(rate ? value / rate : 0));
+    onChangeAmountFrom(formatToCurrency(rate ? value / rate : 0));
   }, INPUT_DEBOUNCE_MS);
 
   const onInitialInputKeyDown = e => {
